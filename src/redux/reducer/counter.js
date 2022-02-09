@@ -20,6 +20,7 @@ export const countDown = () => {
 export function counterReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case COUNT_UP:
+      console.log(action);
       return {
         ...state,
         count: state.count + 1,

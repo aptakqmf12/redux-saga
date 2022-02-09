@@ -1,7 +1,7 @@
-import { all, call, put, takeLatest } from "redux-saga/effects";
-import user from "./user";
+import { all } from "redux-saga/effects";
+import userSaga from "./user";
 import counterSaga from "./counter";
 
 export default function* rootSaga() {
-  yield all([counterSaga(), user()]);
+  yield all([counterSaga(), userSaga()]);
 }

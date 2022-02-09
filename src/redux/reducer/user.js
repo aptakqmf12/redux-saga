@@ -1,47 +1,54 @@
 const INITIAL_STATE = {
-  user: null,
+  loading: true,
   isAuth: false,
-  loginData: [],
+  fetchData: [],
 };
 
-export const LOG_IN = "LOG_IN";
-export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
-export const LOGIN_FAIL = "LOGIN_FAIL";
+export const FETCH = "FETCH";
+export const FETCH_SUCCESS = "FETCH_SUCCESS";
+export const FETCH_FAIL = "FETCH_FAIL";
+export const LOADING_TOGGLE = "LOADING_TOGGLE";
 
-export const loginAction = () => {
+export const fetchAction = () => {
   return {
-    type: LOG_IN,
+    type: FETCH,
   };
 };
-export const loginSuccessAction = () => {
+export const fetchSuccessAction = () => {
   return {
-    type: LOGIN_SUCCESS,
+    type: FETCH_SUCCESS,
   };
 };
-export const loginFailAction = () => {
+export const fetchFailAction = () => {
   return {
-    type: LOGIN_FAIL,
+    type: FETCH_FAIL,
   };
 };
 
 export function userReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case LOG_IN:
+    case FETCH:
       return {
         ...state,
-        user: action.payload,
-      };
-    case LOGIN_SUCCESS:
-      return {
-        ...state,
-        user: action.payload,
+        fetchData: action.payload,
         isAuth: true,
       };
-    case LOGIN_FAIL:
+    case FETCH_SUCCESS:
+      return {
+        ...state,
+        fetchData: action.payload,
+        isAuth: true,
+      };
+    case FETCH_FAIL:
       return {
         ...state,
         user: action.payload,
         isAuth: false,
+      };
+    case LOADING_TOGGLE:
+      return {
+        ...state,
+        loading: !state.loading,
       };
     default:
       return state;

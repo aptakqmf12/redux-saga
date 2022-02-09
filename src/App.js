@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { COUNT_UP, COUNT_DOWN, COUNT_UP_ASYNC } from "./redux/reducer/counter";
+import { FETCH, FETCH_SUCCESS } from "./redux/reducer/user";
 
 function App() {
   const counter = useSelector((state) => state.counterReducer);
@@ -16,6 +17,9 @@ function App() {
   const onDownCount = () => {
     dispatch({ type: COUNT_DOWN });
   };
+  const onFetch = () => {
+    dispatch({ type: FETCH });
+  };
   return (
     <>
       <div>counter.count : {counter.count}</div>
@@ -23,6 +27,13 @@ function App() {
       <button onClick={onAddCountAsync}>count async up</button>
       <button onClick={onAddCount}>count up</button>
       <button onClick={onDownCount}>count down</button>
+      <button onClick={onFetch}>데이터받기</button>
+      {!user.loading && <div>Loading...</div>}
+      <ul>
+        {user.fetchData?.map((data) => {
+          return <li>{data?.title}</li>;
+        })}
+      </ul>
     </>
   );
 }
